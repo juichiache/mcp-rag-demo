@@ -1,0 +1,5 @@
+azure-identity
+openai
+mcp
+mcp[cli]
+azure-search-documents
