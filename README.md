@@ -1,4 +1,4 @@
-# RAG Demo with Azure MCP
+# RAG Demo with Fast MCP
 
 This repository demonstrates a simple Retrieval-Augmented Generation (RAG) workflow using Model Context Protocol (MCP) for Azure search and Azure OpenAI for generation.
 
