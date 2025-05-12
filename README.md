@@ -1,4 +1,4 @@
-# RAG Demo with Fast MCP
+# RAG Demo with Azure MCP
 
 This repository demonstrates a simple Retrieval-Augmented Generation (RAG) workflow using Model Context Protocol (MCP) for Azure search and Azure OpenAI for generation.
 
@@ -15,36 +15,6 @@ This demo application:
    - Prints out a grounded, concise answer (or “I don’t know.”)
 
 ---
-## Architecture
-flowchart LR
-    subgraph Client
-      CLI[CLI Client]
-    end
-
-    subgraph Transport
-      SSE[SSE Transport]
-    end
-
-    subgraph MCP
-      Session[MCP Session]
-      Server[MCP Server]
-    end
-
-    subgraph Azure
-      CogSearch[Azure Cognitive Search]
-      OpenAI[Azure OpenAI]
-    end
-
-    CLI -->|“Enter query”| CLI
-    CLI -->|start SSE| SSE --> Session
-    Session -->|call_tool("search", query)| Server
-    Server -->|proxy to| CogSearch
-    CogSearch -->|search results| Server
-    Server -->|JSONRPCResponse| Session
-    Session -->|docs list| CLI
-    CLI -->|generate_answer(docs)| OpenAI
-    OpenAI -->|completion| CLI
-
 
 ## Getting Started
 
@@ -107,6 +77,7 @@ python demo.py
      ↓
   Final answer printed to console
 
+
 Python & Asyncio
 Runs the whole thing as async code (both the demo CLI and the SSE‐based search server). Uses asyncio for concurrency and streaming.
 
@@ -117,7 +88,7 @@ mcp.client.session.ClientSession to talk the MCP “search” tool
 Server side (mcp_server.py)
 mcp.server.fastmcp.FastMCP to expose an SSE endpoint and route “search” calls
 
-Azure Cognitive Search
+Azure AI Search
 azure.search.documents.aio.SearchClient to query a search index
 azure.search.documents.indexes.aio.SearchIndexClient to build or update that index
 Powers the retrieval of document “chunks” (PDF pages, etc.)
