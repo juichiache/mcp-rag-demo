@@ -15,6 +15,36 @@ This demo application:
    - Prints out a grounded, concise answer (or “I don’t know.”)
 
 ---
+## Architecture
+flowchart LR
+    subgraph Client
+      CLI[CLI Client]
+    end
+
+    subgraph Transport
+      SSE[SSE Transport]
+    end
+
+    subgraph MCP
+      Session[MCP Session]
+      Server[MCP Server]
+    end
+
+    subgraph Azure
+      CogSearch[Azure Cognitive Search]
+      OpenAI[Azure OpenAI]
+    end
+
+    CLI -->|“Enter query”| CLI
+    CLI -->|start SSE| SSE --> Session
+    Session -->|call_tool("search", query)| Server
+    Server -->|proxy to| CogSearch
+    CogSearch -->|search results| Server
+    Server -->|JSONRPCResponse| Session
+    Session -->|docs list| CLI
+    CLI -->|generate_answer(docs)| OpenAI
+    OpenAI -->|completion| CLI
+
 
 ## Getting Started
 
