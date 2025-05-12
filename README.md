@@ -78,32 +78,32 @@ python demo.py
   Final answer printed to console
 
 
-Python & Asyncio
+####Python & Asyncio
 Runs the whole thing as async code (both the demo CLI and the SSE‐based search server). Uses asyncio for concurrency and streaming.
 
-Client side (demo.py)
+####Client side (demo.py)
 mcp.client.sse.sse_client for opening an SSE (Server-Sent-Events) connection
 mcp.client.session.ClientSession to talk the MCP “search” tool
 
-Server side (mcp_server.py)
+####Server side (mcp_server.py)
 mcp.server.fastmcp.FastMCP to expose an SSE endpoint and route “search” calls
 
-Azure AI Search
+####Azure AI Search
 azure.search.documents.aio.SearchClient to query a search index
 azure.search.documents.indexes.aio.SearchIndexClient to build or update that index
 Powers the retrieval of document “chunks” (PDF pages, etc.)
 
-Azure OpenAI
+####Azure OpenAI
 openai.AzureOpenAI client against your Azure OpenAI deployment (GPT-4.1)
 Takes the top N retrieved chunks, concatenates their "content" fields, and feeds them into a chat‐completion prompt
 
-Server-Sent Events (SSE)
+####Server-Sent Events (SSE)
 A lightweight streaming over HTTP mechanism so the client can send a prompt and incrementally receive back search hits
 
-dotenv for configuration
+####dotenv for configuration
 python-dotenv to pull your Azure Search service name/key, Azure OpenAI endpoint/key, index name, etc. out of a .env file
 
-Standard Python tooling
+####Standard Python tooling
 - logging for debug output
 - pprint / json for introspecting responses
 - asyncio.run(...) to kick off the async CLI
