@@ -67,11 +67,11 @@ def generate_answer(openai_client, docs, query):
 
 async def run_rag():
     # 1. Configure Azure OpenAI client
-    endpoint = "https://jc-azureaistudio-aiservices.cognitiveservices.azure.com/"
+    endpoint = ""
     model_name = "gpt-4.1"
     deployment = "gpt-4.1"
 
-    subscription_key = "1c0f8ed07f7b439b9730832e53470eae"
+    subscription_key = ""
     api_version = "2024-12-01-preview"
     openai_client = AzureOpenAI(
         api_version=api_version,
